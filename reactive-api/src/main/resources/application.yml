@@ -1,0 +1,15 @@
+server:
+  port: 7080
+
+spring:
+  application:
+    name: reactive-api
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/demo
+
+mongodb:
+  database: demo
+
+
+
