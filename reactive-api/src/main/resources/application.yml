@@ -11,6 +11,8 @@ spring:
 mongodb:
   database: demo
 
+#Swagger path
+#http://localhost:7080/webjars/swagger-ui/index.html
 
 
 
