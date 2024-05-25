@@ -1,0 +1,20 @@
+{
+   "type":"record",
+   "name":"Event",
+   "namespace":"io.tdshop.message.avro",
+   "fields":[
+      {
+         "name":"eventType",
+         "type":"string"
+      },
+      {
+         "name":"timestamp",
+         "type":"long"
+      },
+      {
+         "name":"payload",
+         "type":"string"
+      }
+   ],
+   "connect.name":"io.tdshop.message.avro.Event"
+}
