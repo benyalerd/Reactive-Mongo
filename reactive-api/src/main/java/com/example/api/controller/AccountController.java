@@ -34,4 +34,11 @@ public class AccountController {
         return accountService.findAll(account);
     }
 
+    @Operation(summary = "test kafka")
+    @ApiResponse(responseCode = "200", description = "all account", content = @Content(schema = @Schema(implementation = List.class)))
+    @GetMapping("/test")
+    public void fetchAccount() {
+        accountService.testKafka();
+    }
+
 }

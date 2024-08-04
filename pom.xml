@@ -28,6 +28,7 @@
 		<!-- API Validation -->
 		<jakarta.validation-api>3.0.2</jakarta.validation-api>
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+		<avro.version>1.11.3</avro.version>
 	</properties>
 
 	<dependencies>
@@ -41,6 +42,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>${avro.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>

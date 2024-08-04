@@ -5,6 +5,7 @@ import com.example.core.dto.response.AccountResponse;
 import com.example.core.mapper.AccountMapper;
 import com.example.core.model.Account;
 import com.example.core.repository.AccountRepository;
+import com.example.kafka.MessageProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    MessageProducer messageProducer;
+
     public Mono<Account> findById(String id) {
         return template.findById(id, Account.class);
     }
@@ -34,5 +38,9 @@ public class AccountService {
         return accountRepository.findAll()
                 .map(AccountMapper.MAPPER::map)
                 .collectList();
+    }
+
+    public void testKafka() {
+        messageProducer.sendMessage("dev-demo", "");
     }
 }
