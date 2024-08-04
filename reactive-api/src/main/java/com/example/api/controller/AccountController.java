@@ -3,6 +3,7 @@ package com.example.api.controller;
 import com.example.api.service.AccountService;
 import com.example.core.dto.request.AccountRequest;
 import com.example.core.dto.response.AccountResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,8 +37,8 @@ public class AccountController {
 
     @Operation(summary = "test kafka")
     @ApiResponse(responseCode = "200", description = "all account", content = @Content(schema = @Schema(implementation = List.class)))
-    @GetMapping("/test")
-    public void fetchAccount() {
+    @GetMapping("kafka/test")
+    public void testKafka() throws JsonProcessingException {
         accountService.testKafka();
     }
 
