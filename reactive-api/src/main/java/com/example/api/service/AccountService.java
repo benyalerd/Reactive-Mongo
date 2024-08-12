@@ -25,14 +25,11 @@ import java.util.List;
 @Slf4j
 public class AccountService {
 
-    @Autowired
-    ReactiveMongoTemplate template;
+    private final ReactiveMongoTemplate template;
 
-    @Autowired
-    AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
-    @Autowired
-    MessageProducer messageProducer;
+    private final MessageProducer messageProducer;
 
     private final ObjectMapper objectMapper;
 

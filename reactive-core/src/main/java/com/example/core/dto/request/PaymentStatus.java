@@ -1,19 +1,22 @@
-package com.example.kafka;
+package com.example.core.dto.request;
 
-public enum EventType {
-    DEMO("demo"),
-    BILLING_PAYMENT_UPDATED("billingPaymentUpdated");
+public enum PaymentStatus {
+
+    AWAITING_PAYMENT("AWAITING_PAYMENT"),
+    COMPLETED("COMPLETED"),
+    CANCELED("CANCELED");
+
     private String value;
 
-    EventType(String value) {
+    PaymentStatus(String value) {
         this.value = value;
     }
 
-    public static EventType fromValue(String value) {
+    public static PaymentStatus fromValue(String value) {
         if (value == null) {
             return null;
         }
-        for (EventType e : EventType.values()) {
+        for (PaymentStatus e : PaymentStatus.values()) {
             if (e.value().equals(value)) {
                 return e;
             }

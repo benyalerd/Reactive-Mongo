@@ -1,6 +1,7 @@
 package com.example.kafka;
 
 import com.example.kafka.dto.Outbox;
+import com.example.service.BillPaymentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import static com.example.kafka.EventType.DEMO;
 public class MessageConsumer {
 
     private final ObjectMapper objectMapper;
+    private final BillPaymentService billPaymentService;
     @RetryableTopic(kafkaTemplate = "kafkaTemplate",
             concurrency = "1",
             sameIntervalTopicReuseStrategy = SameIntervalTopicReuseStrategy.SINGLE_TOPIC,
@@ -33,11 +35,10 @@ public class MessageConsumer {
 
     private void handleEvent(Outbox message) throws Exception {
         switch (EventType.fromValue(message.getType())) {
-            case DEMO:
-                log.info("no process found on: " + message.getPayload());
+            case BILLING_PAYMENT_UPDATED:
+                billPaymentService.latePaymentNotification(message.getPayload());
                 return;
             default:
-                log.info("no process found on: " + message.getPayload());
         }
     }
 }
