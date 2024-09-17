@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
@@ -18,13 +19,12 @@ public class MerchantService {
     private final MerchantRepository merchantRepository;
 
     //Insert Merchant
+    @Transactional
     public Mono<InsertResponse> insertMerchant(@Validated InsertMerchantRequest request) {
         return merchantRepository.insert(MerchantMapper.MAPPER.mapInsertMerchantToMerchant(request))
                 .map(x -> {
                     val response = new InsertResponse();
                     response.setId(x.getId());
-                    response.setStatusCode("200");
-                    response.setMsgCode("success");
                     return response;
                 })
                 .doOnError(throwable -> log.error("[insertMerchant] : " + throwable.getMessage()));

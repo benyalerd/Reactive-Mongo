@@ -11,7 +11,6 @@ import org.springframework.kafka.retrytopic.DltStrategy;
 import org.springframework.kafka.retrytopic.SameIntervalTopicReuseStrategy;
 import org.springframework.stereotype.Component;
 
-import static com.example.kafka.EventType.DEMO;
 
 @Slf4j
 @Component
@@ -35,7 +34,7 @@ public class MessageConsumer {
 
     private void handleEvent(Outbox message) throws Exception {
         switch (EventType.fromValue(message.getType())) {
-            case BILLING_PAYMENT_UPDATED:
+            case LATE_PAYMENT_NOTIFICATION:
                 billPaymentService.latePaymentNotification(message.getPayload());
                 return;
             default:

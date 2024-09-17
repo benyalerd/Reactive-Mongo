@@ -2,7 +2,7 @@ package com.example.kafka;
 
 public enum EventType {
     DEMO("demo"),
-    BILLING_PAYMENT_UPDATED("billingPaymentUpdated");
+    LATE_PAYMENT_NOTIFICATION("latePaymentNotification");
     private String value;
 
     EventType(String value) {
