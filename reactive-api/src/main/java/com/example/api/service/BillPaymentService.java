@@ -21,7 +21,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 import org.webjars.NotFoundException;
 import reactor.core.publisher.Mono;
 
@@ -40,9 +39,10 @@ public class BillPaymentService {
 
     //Insert Bill Payment
     @Transactional
-    public Mono<InsertResponse> insertBillPayment(@Validated InsertBillPaymentRequest request) {
+    public Mono<InsertResponse> insertBillPayment(InsertBillPaymentRequest request) {
         val merchantOptional = merchantRepository.findByMerchantNo(request.getMerchantNo());
         val billPayment = BillPaymentMapper.MAPPER.mapInsertBillPaymentToBillPayment(request);
+        billPayment.setCreatedDate(LocalDateTime.now());
         merchantOptional.ifPresent(billPayment::setMerchant);
 
         return billPaymentRepository.insert(billPayment)

@@ -1,7 +1,7 @@
 package com.example.kafka;
 
 import com.example.kafka.dto.Outbox;
-import com.example.service.BillPaymentService;
+import com.example.service.BillPaymentStreamService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class MessageConsumer {
 
     private final ObjectMapper objectMapper;
-    private final BillPaymentService billPaymentService;
+    private final BillPaymentStreamService billPaymentService;
     @RetryableTopic(kafkaTemplate = "kafkaTemplate",
             concurrency = "1",
             sameIntervalTopicReuseStrategy = SameIntervalTopicReuseStrategy.SINGLE_TOPIC,

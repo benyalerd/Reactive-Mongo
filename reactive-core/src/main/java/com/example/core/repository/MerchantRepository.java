@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MerchantRepository extends ReactiveMongoRepository<Merchant, Long>
+public interface MerchantRepository extends ReactiveMongoRepository<Merchant, String>
 {
     Optional<Merchant> findByMerchantNo (String merchantNo);
 }

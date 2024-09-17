@@ -1,6 +1,8 @@
 package com.example.core.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Document(collection = "merchant")
 @Data
 @Builder
@@ -17,7 +19,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class Merchant extends BaseModel{
     @Id
-    private Long id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private String id;
     @Column(name = "merchant_no")
     private String merchantNo;
     @Column(name = "firstname")

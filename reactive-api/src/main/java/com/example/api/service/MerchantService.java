@@ -9,8 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -20,8 +21,10 @@ public class MerchantService {
 
     //Insert Merchant
     @Transactional
-    public Mono<InsertResponse> insertMerchant(@Validated InsertMerchantRequest request) {
-        return merchantRepository.insert(MerchantMapper.MAPPER.mapInsertMerchantToMerchant(request))
+    public Mono<InsertResponse> insertMerchant(InsertMerchantRequest request) {
+        val merchant = MerchantMapper.MAPPER.mapInsertMerchantToMerchant(request);
+        merchant.setCreatedDate(LocalDateTime.now());
+        return merchantRepository.insert(merchant)
                 .map(x -> {
                     val response = new InsertResponse();
                     response.setId(x.getId());

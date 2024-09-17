@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface BillPaymentRepository extends ReactiveMongoRepository<BillPayment, Long>
+public interface BillPaymentRepository extends ReactiveMongoRepository<BillPayment, String>
 {
    Optional<BillPayment> findByRef1AndRef2 (String ref1,String ref2);
 }

@@ -1,6 +1,5 @@
 package com.example.service;
 
-import com.example.core.dto.request.UpdatePaymentRequest;
 import com.example.core.dto.response.LatePaymentResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -17,7 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class BillPaymentService {
+public class BillPaymentStreamService {
 
     private final ObjectMapper objectMapper;
 
