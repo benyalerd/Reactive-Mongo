@@ -15,10 +15,4 @@ public class BusinessValidationException extends RuntimeException {
         super(message);
         this.code = code;
     }
-
-    public BusinessValidationException(String code, String message, List<Error> errors) {
-        super(message);
-        this.code = code;
-        this.errors = errors;
-    }
 }

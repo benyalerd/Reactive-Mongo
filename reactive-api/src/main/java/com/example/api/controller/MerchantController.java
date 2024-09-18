@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,7 @@ public class MerchantController {
     @Operation(summary = "register merchant")
     @ApiResponse(responseCode = "200", description = "insert merchant success", content = @Content(schema = @Schema(implementation = InsertResponse.class)))
     @PostMapping("/insert")
-    public Mono<InsertResponse> insertMerchant(@RequestBody @Validated InsertMerchantRequest insertMerchantRequest) {
+    public Mono<InsertResponse> insertMerchant(@RequestBody InsertMerchantRequest insertMerchantRequest) {
         return merchantService.insertMerchant(insertMerchantRequest);
     }
 

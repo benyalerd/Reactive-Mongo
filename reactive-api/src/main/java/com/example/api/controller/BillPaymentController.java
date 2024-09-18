@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +30,14 @@ public class BillPaymentController {
     @Operation(summary = "create bill payment")
     @ApiResponse(responseCode = "200", description = "insert bill payment success", content = @Content(schema = @Schema(implementation = InsertResponse.class)))
     @PostMapping("/insert")
-    public Mono<InsertResponse> insertBillPayment(@RequestBody @Validated InsertBillPaymentRequest insertBillPaymentRequest) {
+    public Mono<InsertResponse> insertBillPayment(@RequestBody InsertBillPaymentRequest insertBillPaymentRequest) {
         return billPaymentService.insertBillPayment(insertBillPaymentRequest);
     }
 
     @Operation(summary = "daily event -> update bill payment status and get late payment send to kafka after that send email notification to merchant")
     @ApiResponse(responseCode = "200", description = "update bill payment status success")
     @PostMapping("/update/payment-status")
-    public Mono<List<LatePaymentResponse>> updatePaymentStatus(@RequestBody @Validated UpdatePaymentRequest updatePaymentRequest) {
+    public Mono<List<LatePaymentResponse>> updatePaymentStatus(@RequestBody UpdatePaymentRequest updatePaymentRequest) {
         return billPaymentService.updatePaymentStatus(updatePaymentRequest);
     }
 

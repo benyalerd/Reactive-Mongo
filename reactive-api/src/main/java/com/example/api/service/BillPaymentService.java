@@ -15,6 +15,7 @@ import com.example.kafka.MessageProducer;
 import com.example.kafka.dto.Outbox;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -27,6 +28,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,10 +44,17 @@ public class BillPaymentService {
     private final ReactiveMongoTemplate template;
     private final MessageProducer messageProducer;
     private final ObjectMapper objectMapper;
-
+    private final Validator validator;
     //Insert Bill Payment
     @Transactional
     public Mono<InsertResponse> insertBillPayment(InsertBillPaymentRequest request) {
+
+        val result = validator.validate(request);
+        if (!result.isEmpty()) {
+            List<String> error = new ArrayList<>();
+            result.forEach(e -> error.add(e.getPropertyPath().toString() + " : " + e.getMessage()));
+            throw new BusinessValidationException("",error.toString());
+        }
 
         val billPayment = BillPaymentMapper.MAPPER.mapInsertBillPaymentToBillPayment(request);
         billPayment.setCreatedDate(LocalDateTime.now());
@@ -70,6 +79,13 @@ public class BillPaymentService {
     //Updated Bil Payment Status
     @Transactional
     public Mono<List<LatePaymentResponse>> updatePaymentStatus(UpdatePaymentRequest request) {
+
+        val result = validator.validate(request);
+        if (!result.isEmpty()) {
+            List<String> error = new ArrayList<>();
+            result.forEach(e -> error.add(e.getPropertyPath().toString() + " : " + e.getMessage()));
+            throw new BusinessValidationException("",error.toString());
+        }
 
         if (request.getPaymentDetailList().isEmpty()) {
             return Mono.empty();
