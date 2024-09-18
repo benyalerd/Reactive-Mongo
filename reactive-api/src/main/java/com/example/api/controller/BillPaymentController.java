@@ -28,14 +28,14 @@ public class BillPaymentController {
 
     private final BillPaymentService billPaymentService;
 
-    @Operation(summary = "insert bill payment")
+    @Operation(summary = "create bill payment")
     @ApiResponse(responseCode = "200", description = "insert bill payment success", content = @Content(schema = @Schema(implementation = InsertResponse.class)))
     @PostMapping("/insert")
     public Mono<InsertResponse> insertBillPayment(@RequestBody @Validated InsertBillPaymentRequest insertBillPaymentRequest) {
         return billPaymentService.insertBillPayment(insertBillPaymentRequest);
     }
 
-    @Operation(summary = "update bill payment status")
+    @Operation(summary = "daily event -> update bill payment status and get late payment send to kafka after that send email notification to merchant")
     @ApiResponse(responseCode = "200", description = "update bill payment status success")
     @PostMapping("/update/payment-status")
     public Mono<List<LatePaymentResponse>> updatePaymentStatus(@RequestBody @Validated UpdatePaymentRequest updatePaymentRequest) {

@@ -24,7 +24,7 @@ public class MerchantController {
 
     private final MerchantService merchantService;
 
-    @Operation(summary = "insert merchant")
+    @Operation(summary = "register merchant")
     @ApiResponse(responseCode = "200", description = "insert merchant success", content = @Content(schema = @Schema(implementation = InsertResponse.class)))
     @PostMapping("/insert")
     public Mono<InsertResponse> insertMerchant(@RequestBody @Validated InsertMerchantRequest insertMerchantRequest) {
