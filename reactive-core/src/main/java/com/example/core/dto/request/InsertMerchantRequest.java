@@ -6,8 +6,6 @@ import lombok.Data;
 @Data
 public class InsertMerchantRequest {
     @NotBlank
-    private String merchantNo;
-    @NotBlank
     private String firstname;
     @NotBlank
     private String lastname;

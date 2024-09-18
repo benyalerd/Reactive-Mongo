@@ -3,7 +3,6 @@ package com.example.api.controller;
 import com.example.api.service.MerchantService;
 import com.example.core.dto.request.InsertMerchantRequest;
 import com.example.core.dto.response.InsertResponse;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +27,7 @@ public class MerchantController {
     @Operation(summary = "insert merchant")
     @ApiResponse(responseCode = "200", description = "insert merchant success", content = @Content(schema = @Schema(implementation = InsertResponse.class)))
     @PostMapping("/insert")
-    public Mono<InsertResponse> insertMerchant(@RequestBody @Validated InsertMerchantRequest insertMerchantRequest) throws JsonProcessingException {
+    public Mono<InsertResponse> insertMerchant(@RequestBody @Validated InsertMerchantRequest insertMerchantRequest) {
         return merchantService.insertMerchant(insertMerchantRequest);
     }
 

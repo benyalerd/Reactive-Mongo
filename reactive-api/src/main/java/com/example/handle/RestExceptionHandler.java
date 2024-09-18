@@ -52,9 +52,9 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(BusinessValidationException.class)
-    public ResponseEntity<ApiErrorResponse> handleBusinessValidationException(HttpServerErrorException e) {
-        return ResponseEntity.status(e.getStatusCode()).body(ApiErrorResponse.builder()
-                .statusCode(String.valueOf(e.getStatusCode().value()))
+    public ResponseEntity<ApiErrorResponse> handleBusinessValidationException(BusinessValidationException e) {
+        return ResponseEntity.status(BAD_REQUEST).body(ApiErrorResponse.builder()
+                .statusCode(e.getCode())
                 .statusMsg(e.getMessage())
                 .build());
     }

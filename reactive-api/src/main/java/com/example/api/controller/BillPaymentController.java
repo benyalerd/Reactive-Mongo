@@ -4,7 +4,8 @@ import com.example.api.service.BillPaymentService;
 import com.example.core.dto.request.InsertBillPaymentRequest;
 import com.example.core.dto.request.UpdatePaymentRequest;
 import com.example.core.dto.response.InsertResponse;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.core.dto.response.LatePaymentResponse;
+import com.example.core.model.BillPayment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -33,11 +36,11 @@ public class BillPaymentController {
         return billPaymentService.insertBillPayment(insertBillPaymentRequest);
     }
 
-    @Operation(summary = "update bill payment")
-    @ApiResponse(responseCode = "200", description = "update bill payment success")
+    @Operation(summary = "update bill payment status")
+    @ApiResponse(responseCode = "200", description = "update bill payment status success")
     @PostMapping("/update/payment-status")
-    public void updatePaymentStatus(@RequestBody @Validated UpdatePaymentRequest updatePaymentRequest) throws JsonProcessingException {
-        billPaymentService.updatePaymentStatus(updatePaymentRequest);
+    public Mono<List<LatePaymentResponse>> updatePaymentStatus(@RequestBody @Validated UpdatePaymentRequest updatePaymentRequest) {
+        return billPaymentService.updatePaymentStatus(updatePaymentRequest);
     }
 
 }

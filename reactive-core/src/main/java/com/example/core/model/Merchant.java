@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = false)
@@ -22,6 +23,7 @@ public class Merchant extends BaseModel{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private String id;
     @Column(name = "merchant_no")
+    @Indexed(unique = true)
     private String merchantNo;
     @Column(name = "firstname")
     private String firstname;

@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+
 @EqualsAndHashCode(callSuper = false)
 @Document(collection = "bill_payment")
 @Data
@@ -28,7 +30,7 @@ public class BillPayment extends BaseModel{
     @Column(name = "ref2")
     private String ref2;
     @Column(name = "due_date")
-    private String dueDate;
+    private LocalDate dueDate;
     @Column(name = "status")
     private String status;
     @Column(name = "amount")

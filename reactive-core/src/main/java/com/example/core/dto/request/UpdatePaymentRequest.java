@@ -7,6 +7,7 @@ import java.util.List;
 @Data
 public class UpdatePaymentRequest {
     private List<PaymentDetail> paymentDetailList;
+    private String updatedBy;
 
     @Data
     public static class PaymentDetail{
