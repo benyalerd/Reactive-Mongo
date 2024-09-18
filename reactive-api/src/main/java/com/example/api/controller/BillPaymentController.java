@@ -5,7 +5,6 @@ import com.example.core.dto.request.InsertBillPaymentRequest;
 import com.example.core.dto.request.UpdatePaymentRequest;
 import com.example.core.dto.response.InsertResponse;
 import com.example.core.dto.response.LatePaymentResponse;
-import com.example.core.model.BillPayment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

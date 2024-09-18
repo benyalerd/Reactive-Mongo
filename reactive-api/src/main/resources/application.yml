@@ -15,4 +15,4 @@ mongodb:
   database: demo
 
 #Swagger path
-#http://localhost:7080/webjars/swagger-ui/index.html
+#http://localhost:7081/webjars/swagger-ui/index.html
