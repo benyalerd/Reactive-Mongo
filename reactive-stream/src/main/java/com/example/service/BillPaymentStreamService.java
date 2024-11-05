@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -20,10 +22,23 @@ public class BillPaymentStreamService {
 
     private final ObjectMapper objectMapper;
 
+    private final EmailService mailService;
+
     //Send noti to email
     public void latePaymentNotification(String payload) throws JsonProcessingException {
-        List<LatePaymentResponse> request = objectMapper.readValue(payload, new TypeReference<List<LatePaymentResponse>>(){});
+        List<LatePaymentResponse> result = objectMapper.readValue(payload, new TypeReference<List<LatePaymentResponse>>() {
+        });
         DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        log.info(String.format("notification date : %s -> information : %s", LocalDateTime.now().format(datetimeFormat),objectMapper.writeValueAsString(request)));
+        log.info(String.format("notification date : %s -> information : %s", LocalDateTime.now().format(datetimeFormat), objectMapper.writeValueAsString(result)));
+        //Send email
+
+        result.forEach(x -> {
+            String mailTo = x.getEmail();
+
+            Map<String, String> model = new HashMap<>();
+            model.put("fullname", x.getFirstname() + " " + x.getLastname());
+            model.put("totalAmount", x.getAmount().toString() + " THB");
+            mailService.sendLatePaymentNotification(mailTo, model);
+        });
     }
 }
