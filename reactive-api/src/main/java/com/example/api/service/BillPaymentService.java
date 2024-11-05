@@ -95,7 +95,7 @@ public class BillPaymentService {
                 .flatMap(x -> billPaymentRepository.findByRef1AndRef2(x.getRef1(), x.getRef2())
                         .map(res -> {
 
-                            res.setStatus(PaymentStatus.COMPLETED.value());
+                            res.setStatus(PaymentStatus.COMPLETED);
                             res.setLastModifiedBy(request.getUpdatedBy());
                             res.setLastModifiedDate(LocalDateTime.now());
                             return res;

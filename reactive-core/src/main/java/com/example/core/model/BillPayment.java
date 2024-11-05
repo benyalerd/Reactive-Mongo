@@ -1,5 +1,6 @@
 package com.example.core.model;
 
+import com.example.core.dto.request.PaymentStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class BillPayment extends BaseModel{
     @Column(name = "due_date")
     private LocalDate dueDate;
     @Column(name = "status")
-    private String status;
+    private PaymentStatus status;
     @Column(name = "amount")
     private Double amount;
 }
